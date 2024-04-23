@@ -6,7 +6,7 @@
   "contributors": [],
   "dependencies": {
     "methods": "^1.1.2",
-    "superagent": "^8.1.2"
+    "superagent": "^9.0.1"
   },
   "devDependencies": {
     "body-parser": "^1.20.2",
@@ -22,7 +22,7 @@
     "should": "^13.2.3"
   },
   "engines": {
-    "node": ">=6.4.0"
+    "node": ">=14.18.0"
   },
   "files": [
     "index.js",
