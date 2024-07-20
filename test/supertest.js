@@ -871,6 +871,20 @@ describe('request(app)', function () {
           .expect('Content-Type', /text/)
           .end(done);
       });
+
+      it('fails for non-Error values that are thrown', function (done) {
+        get
+          .expect(function (res) {
+            // eslint-disable-next-line no-throw-literal
+            throw 'error123';
+          })
+          .end(function (err) {
+            should.exist(err);
+            err.message.should.equal('error123');
+            shouldIncludeStackWithThisFile(err);
+            done();
+          });
+      });
     });
 
     describe('handling multiple assertions per field', function () {
