@@ -216,6 +216,23 @@ describe('request(app)', function () {
       });
   });
 
+  describe('.bearer(token)', function () {
+    it('should work the bearer token', function () {
+      const app = express();
+      const test = request(app);
+
+      app.get('/', function (req, res) {
+        if (req.headers.authorization === 'Bearer test-token') {
+          res.status(200).send('Authorized');
+        } else {
+          res.status(403).send('Unauthorized');
+        }
+      });
+
+      test.get('/').bearer('test-token').expect(200).expect('Authoried');
+    });
+  });
+
   describe('.end(fn)', function () {
     it('should close server', function (done) {
       const app = express();
