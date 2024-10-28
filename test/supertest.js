@@ -1390,13 +1390,16 @@ describeHttp2('http2', function() {
         res.end('hey');
       };
 
-      it('should fire up the app on an ephemeral port', function (done) {
-        api(app, { http2: true })
+      it('should fire up the app on a single ephemeral port', function (done) {
+        const agent = api(app, { http2: true });
+        agent
           .get('/')
-          .end(function (err, res) {
-            res.status.should.equal(200);
-            res.text.should.equal('hey');
-            done();
+          .end(function (err1, res1) {
+            res1.request.url.should.match(/^http:\/\/127.0.0.1:(\d+)\/$/);
+            agent.get('/').end(function (err2, res2) {
+              res2.request.url.should.equal(res1.request.url);
+              done();
+            });
           });
       });
 

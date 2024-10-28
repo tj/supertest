@@ -32,9 +32,9 @@ module.exports = function(app, options = {}) {
           'supertest: this version of Node.js does not support http2'
         );
       }
-      app = http2.createServer(app); // eslint-disable-line no-param-reassign
+      app = http2.createServer(app).listen(0); // eslint-disable-line no-param-reassign
     } else {
-      app = http.createServer(app); // eslint-disable-line no-param-reassign
+      app = http.createServer(app).listen(0); // eslint-disable-line no-param-reassign
     }
   }
 
