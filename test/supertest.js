@@ -34,7 +34,7 @@ describe('request(url)', function () {
     });
 
     server = app.listen(function () {
-      const url = 'http://localhost:' + server.address().port;
+      const url = 'http://127.0.0.1:' + server.address().port;
       request(url)
         .get('/')
         .expect('hello', done);
@@ -51,7 +51,7 @@ describe('request(url)', function () {
       });
 
       server = app.listen(function () {
-        const url = 'http://localhost:' + server.address().port;
+        const url = 'http://127.0.0.1:' + server.address().port;
         const test = request(url).get('/');
         test.end(function (err, res) {
           this.should.eql(test);
@@ -107,7 +107,7 @@ describe('request(app)', function () {
     });
 
     server = app.listen(function () {
-      const url = 'http://localhost:' + server.address().port;
+      const url = 'http://127.0.0.1:' + server.address().port;
       request(url)
         .get('/')
         .end(function (err, res) {
@@ -328,7 +328,7 @@ describe('request(app)', function () {
       });
 
       server = app.listen(function () {
-        const url = 'http://localhost:' + server.address().port;
+        const url = 'http://127.0.0.1:' + server.address().port;
         request(url)
           .get('/')
           .timeout(1)
@@ -348,7 +348,7 @@ describe('request(app)', function () {
       });
 
       server = app.listen(function () {
-        const url = 'http://localhost:' + server.address().port;
+        const url = 'http://127.0.0.1:' + server.address().port;
         server.close();
         request(url)
           .get('/')
@@ -381,7 +381,7 @@ describe('request(app)', function () {
 
   describe('.expect(status)', function () {
     it('should handle connection error', function (done) {
-      const req = request.agent('http://localhost:1234');
+      const req = request.agent('http://127.0.0.1:1234');
 
       req
         .get('/')
